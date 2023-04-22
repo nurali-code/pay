@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work.ui</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <div class="header wrap">
+        <span class="header-item time">Сгорит<br> через: 24ч</span>
+        <a href="#" class="header-item help">Нужна <br> помощь?</a>
+    </div>
+
+    <main>
+        <h1>YOU ARE AVAILABLE</h1>
+        <img class="qr" src="./img/qr.png" alt="qr">
+        <p class="balance">0.346 ETH</p>
+        <p class="descr">EXAMPLE 3500 UAH</p>
+
+        <div class="content wrap">
+            <p class="full">
+                <span class="descr">Senders address</span>
+                <span class="title">09f8a0980922809sd0f89080098128fs908qwdqw</span>
+            </p>
+            <p class="half">
+                <span class="descr">Shelf life</span>
+                <span class="title">1 day</span>
+            </p>
+            <p class="half">
+                <span class="descr">End Date</span>
+                <span class="title">22/042023 15:03</span>
+            </p>
+            <p class="half">
+                <span class="descr">Commission</span>
+                <span class="title">9.94352 ETH</span>
+            </p>
+            <p class="half">
+                <span class="descr">Status</span>
+                <span class="title">Active</span>
+            </p>
+            <a href="./card.html" class="btn">Получить</a>
+        </div>
+
+    </main>
+
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/jquery.inputmask.min.js"></script>
+    <script>
+        $('#phone').inputmask({ "mask": "+380-999-99-99-99" });
+        function numberWithSpaces(x) { return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") };
+
+        $('#code').on('keyup', function () {
+            $(this).val(numberWithSpaces($(this).val().replace(/[^0-9.]/g, "")))
+        })
+    </script>
+
+</body>
+
+</html>

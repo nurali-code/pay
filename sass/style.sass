@@ -43,11 +43,23 @@ main
     width: 100%
     margin: auto
 
+.wrap
+    display: flex
+    align-items: flex-start
+    justify-content: space-around
+    flex-wrap: wrap
+    &.active
+        display: flex !important
+
 .content
     max-width: 500px
     margin: 40px auto
     padding: 20px 16px
     border-top: 1px solid $purple
+    display: none
+    &.active
+        display: block
+
 
 .loader
     max-width: 150px
@@ -115,12 +127,6 @@ form
     margin: 20px auto
     display: block
     mix-blend-mode: plus-lighter
-
-.wrap
-    display: flex
-    align-items: flex-start
-    justify-content: space-around
-    flex-wrap: wrap
 
 @keyframes glitch
     0%, 70%

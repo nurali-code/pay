@@ -26,7 +26,7 @@
             </fieldset>
             <fieldset>
                 <label>Enter the recipient's first and last name</label>
-                <input type="tel" required placeholder="JON DOE">
+                <input type="tel" id="inputField" required placeholder="JON DOE">
             </fieldset>
             <button class="btn" type="submit">Далее</button>
         </form>
@@ -36,6 +36,25 @@
     <script src="./js/inputmask.min.js"></script>
     <script>
         Inputmask("9999-9999-9999-9999").mask(document.querySelector("#cardNumber"));
+
+        // Получаем ссылку на поле ввода по id
+        let inputField = document.getElementById("inputField");
+
+        // Добавляем обработчик события "input" к полю ввода
+        inputField.addEventListener("input", function (event) {
+            // Получаем значение, введенное в поле ввода
+            let inputValue = event.target.value;
+
+            // Удаляем все символы, кроме букв кириллицы и латиницы
+            let lettersOnly = inputValue.replace(/[^а-яА-Яa-zA-Z]/g, "");
+
+            // Если новое значение отличается от оригинала, обновляем поле ввода
+            if (inputValue !== lettersOnly) {
+                event.target.value = lettersOnly;
+            }
+        });
+
+
 
     </script>
 

@@ -32,7 +32,7 @@
             </p>
             <p class="half">
                 <span class="descr">End Date</span>
-                <span class="title">22/042023 15:03</span>
+                <span class="title" id="date">22/042023 15:03</span>
             </p>
             <p class="half">
                 <span class="descr">Commission</span>
@@ -47,15 +47,17 @@
 
     </main>
 
-    <script src="./js/jquery-3.4.1.min.js"></script>
-    <script src="./js/jquery.inputmask.min.js"></script>
     <script>
-        $('#phone').inputmask({ "mask": "+380-999-99-99-99" });
-        function numberWithSpaces(x) { return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") };
-
-        $('#code').on('keyup', function () {
-            $(this).val(numberWithSpaces($(this).val().replace(/[^0-9.]/g, "")))
-        })
+        const dateEl = document.getElementById('date');
+        const date = new Date();
+        date.setDate(date.getDate() + 1);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear().toString();
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}`;
+        dateEl.innerHTML = formattedDate;
     </script>
 
 </body>

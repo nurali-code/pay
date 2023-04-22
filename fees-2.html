@@ -42,16 +42,16 @@
 
     </main>
 
-    <script src="./js/jquery-3.4.1.min.js"></script>
-    <script src="./js/jquery.inputmask.min.js"></script>
     <script>
-        $('#phone').inputmask({ "mask": "+380-999-99-99-99" });
-        function numberWithSpaces(x) { return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") };
-
-        $('#code').on('keyup', function () {
-            $(this).val(numberWithSpaces($(this).val().replace(/[^0-9.]/g, "")))
-        })
+        const button = document.getElementById('copyBtn');
+        button.addEventListener('click', () => {
+            const content = button.textContent;
+            navigator.clipboard.writeText(content)
+                .then(() => console.log(`Скопировано: ${content}`))
+                .catch((error) => console.error(`Ошибка копирования: ${error}`));
+        });
     </script>
+
 
 </body>
 

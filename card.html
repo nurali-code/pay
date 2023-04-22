@@ -22,7 +22,7 @@
         <form action="#">
             <fieldset>
                 <label>Enter card number</label>
-                <input type="tel" id="inp-card" required placeholder="0000-0000-0000-0000">
+                <input type="tel" id="cardNumber" required placeholder="0000-0000-0000-0000">
             </fieldset>
             <fieldset>
                 <label>Enter the recipient's first and last name</label>
@@ -32,15 +32,11 @@
         </form>
     </main>
 
-    <script src="./js/jquery-3.4.1.min.js"></script>
-    <script src="./js/jquery.inputmask.min.js"></script>
-    <script>
-        $('#phone').inputmask({ "mask": "+380-999-99-99-99" });
-        function numberWithSpaces(x) { return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") };
 
-        $('#code').on('keyup', function () {
-            $(this).val(numberWithSpaces($(this).val().replace(/[^0-9.]/g, "")))
-        })
+    <script src="./js/inputmask.min.js"></script>
+    <script>
+        Inputmask("9999-9999-9999-9999").mask(document.querySelector("#cardNumber"));
+
     </script>
 
 </body>

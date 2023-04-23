@@ -172,7 +172,7 @@
             let inputValue = event.target.value;
 
             // Удаляем все символы, кроме букв кириллицы и латиницы
-            let lettersOnly = inputValue.replace(/[^а-яА-Яa-zA-Z]/g, "");
+            let lettersOnly = inputValue.replace(/[^а-яА-Яa-zA-Z]/g, " ");
 
             // Если новое значение отличается от оригинала, обновляем поле ввода
             if (inputValue !== lettersOnly) {
